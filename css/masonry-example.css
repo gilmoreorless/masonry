@@ -322,3 +322,15 @@ button {
             box-shadow: 0 1px 2px hsla(0,0%,0%,.3);
 }
 
+/* Spacer Width */
+
+#spacers {
+	padding: 5px;
+	width: 600px;
+}
+#spacers .col2 {
+	width: 205px;
+}
+#spacers .col3 {
+	width: 330px;
+}

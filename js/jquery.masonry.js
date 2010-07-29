@@ -63,7 +63,7 @@
             }
             
             var position = {
-                left: props.colW * shortCol + props.posLeft,
+                left: props.colW * shortCol + props.posLeft + props.spacW * shortCol,
                 top: setY[ shortCol ]
             };
 
@@ -94,11 +94,13 @@
                 props.colW = props.masoned ?
                         $wall.data('masonry').colW :
                         props.$bricks.outerWidth(true);
+                props.spacW = props.masoned && $wall.data('masonry').spacW || 0;
             } else {
                 props.colW = opts.columnWidth;
+                props.spacW = +opts.spacerWidth || 0;
             }
 
-            props.colCount = Math.floor( $wall.width() / props.colW ) ;
+            props.colCount = Math.floor( ( $wall.width() + props.spacW ) / ( props.colW + props.spacW ) ) ;
             props.colCount = Math.max( props.colCount, 1 );
         };
 
@@ -152,7 +154,7 @@
                     var $brick = $(this);
                 
                     //how many columns does this brick span
-                    var colSpan = Math.ceil( $brick.outerWidth(true) / props.colW);
+                    var colSpan = Math.ceil( ( $brick.outerWidth(true) + props.spacW ) / ( props.colW + props.spacW ) );
                     colSpan = Math.min( colSpan, props.colCount );
 
                     
@@ -286,6 +288,7 @@
         defaults : {
             singleMode: false,
             columnWidth: undefined,
+            spacerWidth: undefined,
             itemSelector: undefined,
             appendedContent: undefined,
             saveOptions: true,
@@ -296,6 +299,7 @@
         colW: undefined,
         colCount: undefined,
         colY: undefined,
+        spacW: undefined,
         wallH: undefined,
         masoned: undefined,
         posTop: 0,
